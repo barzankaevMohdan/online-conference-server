@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    credentials: true,
+    credentials: '*',
     origin: process.env.CLIENT_URL
 }))
 app.use('/api', router)
