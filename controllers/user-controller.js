@@ -16,7 +16,7 @@ class UserController {
                 userData.refreshToken,
                 {
                     secure: true,
-                    domain: process.env.CLIENT_URL,
+                    domain: 'localhost',
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
                     sameSite:'none',
@@ -37,7 +37,7 @@ class UserController {
                 userData.refreshToken,
                 {
                     secure: true,
-                    domain: process.env.CLIENT_URL,
+                    domain: 'localhost',
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
                     sameSite:'none',
@@ -80,7 +80,7 @@ class UserController {
                 userData.refreshToken,
                 {
                     secure: true,
-                    domain: process.env.CLIENT_URL,
+                    domain: 'localhost',
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
                     sameSite:'none',
