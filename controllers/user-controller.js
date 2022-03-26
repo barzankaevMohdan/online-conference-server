@@ -15,7 +15,7 @@ class UserController {
                 'refreshToken',
                 userData.refreshToken,
                 {
-                    domain: 'mohdan-online-conference-front.herokuapp.com',
+                    domain: 'mohdan-online-conference-front.herokuapp',
                     secure: true,
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
@@ -36,7 +36,7 @@ class UserController {
                 'refreshToken',
                 userData.refreshToken,
                 {
-                    domain: 'mohdan-online-conference-front.herokuapp.com',
+                    domain: 'mohdan-online-conference-front.herokuapp',
                     secure: true,
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
@@ -79,7 +79,7 @@ class UserController {
                 'refreshToken',
                 userData.refreshToken,
                 {
-                    domain: 'mohdan-online-conference-front.herokuapp.com',
+                    domain: 'mohdan-online-conference-front.herokuapp',
                     secure: true,
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
