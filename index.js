@@ -8,7 +8,7 @@ const errorMiddleware = require('./middlewares/error-middleware')
 
 const PORT = process.env.PORT || 5000
 const app = express()
-app.set('trust proxy', '127.0.0.1')
+app.set('trust proxy', 1)
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
