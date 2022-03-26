@@ -15,7 +15,7 @@ class UserController {
                 'refreshToken',
                 userData.refreshToken,
                 {
-                    secure: process.env.NODE_ENV === "production",
+                    secure: true,
                     domain: process.env.CLIENT_URL,
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
@@ -36,7 +36,7 @@ class UserController {
                 'refreshToken',
                 userData.refreshToken,
                 {
-                    secure: process.env.NODE_ENV === "production",
+                    secure: true,
                     domain: process.env.CLIENT_URL,
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
@@ -79,7 +79,7 @@ class UserController {
                 'refreshToken',
                 userData.refreshToken,
                 {
-                    secure: process.env.NODE_ENV === "production",
+                    secure: true,
                     domain: process.env.CLIENT_URL,
                     maxAge: 30 * 24 * 60 * 60 * 1000,
                     httpOnly: true,
