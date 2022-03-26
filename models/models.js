@@ -5,6 +5,7 @@ const Speech = require('./speech-model')
 const Speaker = require('./speaker-model')
 const Message = require('./Chat/message-model')
 const ChatRoom = require('./Chat/chat-rooms-model')
+const Player = require('./player-model')
 
 User.hasOne(Token)
 Token.belongsTo(User)
@@ -18,6 +19,9 @@ Speaker.belongsTo(Speech)
 ChatRoom.hasMany(Message)
 Message.belongsTo(ChatRoom)
 
+Stream.hasMany(Player)
+Player.belongsTo(Stream)
+
 module.exports = {
     User,
     Token,
@@ -25,5 +29,6 @@ module.exports = {
     Speech,
     Speaker,
     Message,
-    ChatRoom
+    ChatRoom,
+    Player,
 }
