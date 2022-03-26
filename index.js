@@ -8,10 +8,7 @@ const errorMiddleware = require('./middlewares/error-middleware')
 
 const PORT = process.env.PORT || 5000
 const app = express()
-app.set('trust proxy', (ip) => {
-    if (ip === '127.0.0.1' || ip === '3.209.172.72' || ip === '34.201.81.34') return true // trusted IPs
-    else return false
-})
+app.set('trust proxy', '127.0.0.1')
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
