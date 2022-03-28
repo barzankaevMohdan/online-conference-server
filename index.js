@@ -5,10 +5,21 @@ const cookieParser = require('cookie-parser')
 const sequelize = require('./db')
 const router = require('./router/index')
 const errorMiddleware = require('./middlewares/error-middleware')
+const session = require('express-session')
 
 const PORT = process.env.PORT || 5000
 const app = express()
 app.set('trust proxy', 1)
+app.use(session({
+    secret: process.env.JWT_ACCESS_SECRET,
+    cookie: {
+        secure: true,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        sameSite: 'none',
+        domain: process.env.DOMAIN,
+    }
+}))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
