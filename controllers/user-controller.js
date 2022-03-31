@@ -11,7 +11,7 @@ class UserController {
             }
             const {email, password, name} = req.body
             const userData = await userService.registration(email, password, name)
-            res.cookie('refreshToken', userData.refreshToken)
+            res.cookie('refreshToken', userData.refreshToken, {path: '/api'})
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -22,7 +22,7 @@ class UserController {
         try {
             const {email, password} = req.body
             const userData = await userService.login(email, password)
-            res.cookie('refreshToken', userData.refreshToken)
+            res.cookie('refreshToken', userData.refreshToken, {path: '/api'})
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -33,7 +33,7 @@ class UserController {
         try {
             const {refreshToken} = req.cookies
             const token = await userService.logout(refreshToken)
-            res.clearCookie('refreshToken')
+            res.clearCookie('refreshToken', {path: '/api'})
             return res.json(token)
         } catch (e) {
             next(e)
@@ -55,7 +55,7 @@ class UserController {
         try {
             const {refreshToken} = req.cookies
             const userData = await userService.refresh(refreshToken)
-            res.cookie('refreshToken', userData.refreshToken)
+            res.cookie('refreshToken', userData.refreshToken, {path: '/api'})
             return res.json(userData)
         } catch (e) {
             next(e)
