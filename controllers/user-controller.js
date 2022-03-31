@@ -22,7 +22,7 @@ class UserController {
         try {
             const {email, password} = req.body
             const userData = await userService.login(email, password)
-            // res.cookie('refreshToken', userData.refreshToken)
+            res.cookie('refreshToken', userData.refreshToken)
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -31,7 +31,7 @@ class UserController {
 
     async logout(req, res, next) {
         try {
-            const {refreshToken} = req.cookies
+            const {refreshToken} = req.body // change it to req.cookie
             const token = await userService.logout(refreshToken)
             res.clearCookie('refreshToken')
             return res.json(token)
