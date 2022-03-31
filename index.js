@@ -10,14 +10,14 @@ const session = require('express-session')
 const PORT = process.env.PORT || 5000
 const app = express()
 app.use(session({
-    secureProxy: true,
+    resave: true,
+    saveUninitialized: false,
     secret: process.env.JWT_ACCESS_SECRET,
     cookie: {
         secure: true,
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         sameSite: 'none',
-        domain: process.env.DOMAIN,
     }
 }))
 app.set('trust proxy', 1)
