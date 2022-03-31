@@ -16,8 +16,7 @@ class UserController {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
                 sameSite: 'none',
-                domain: process.env.DOMAIN,
-                path: '/api'
+                path: '/'
             })
             return res.json(userData)
         } catch (e) {
@@ -34,8 +33,7 @@ class UserController {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
                 sameSite: 'none',
-                domain: process.env.DOMAIN,
-                path: '/api'
+                path: '/'
             })
             return res.json(userData)
         } catch (e) {
@@ -52,8 +50,7 @@ class UserController {
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
                 sameSite: 'none',
-                domain: process.env.DOMAIN,
-                path: '/api'
+                path: '/'
             })
             return res.json(token)
         } catch (e) {
@@ -82,7 +79,7 @@ class UserController {
                 httpOnly: true,
                 sameSite: 'none',
                 domain: process.env.DOMAIN,
-                path: '/api'
+                path: '/'
             })
             return res.json(userData)
         } catch (e) {
