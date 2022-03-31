@@ -9,9 +9,8 @@ const session = require('express-session')
 
 const PORT = process.env.PORT || 5000
 const app = express()
-app.set('trust proxy', 1)
 app.use(session({
-    secret: process.env.JWT_ACCESS_SECRET,
+    secret: 'secretMohdan1234',
     cookie: {
         secure: true,
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -20,6 +19,7 @@ app.use(session({
         domain: process.env.DOMAIN,
     }
 }))
+app.set('trust proxy', 1)
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
