@@ -9,7 +9,7 @@ class TokenService {
         const accessToken = jwt.sign(
             payload,
             JWT_ACCESS_SECRET,
-            {expiresIn: '30m'}
+            {expiresIn: '1d'}
         )
         const refreshToken = jwt.sign(
             payload,

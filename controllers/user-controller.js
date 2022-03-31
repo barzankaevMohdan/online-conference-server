@@ -22,7 +22,7 @@ class UserController {
         try {
             const {email, password} = req.body
             const userData = await userService.login(email, password)
-            res.cookie('refreshToken', userData.refreshToken)
+            // res.cookie('refreshToken', userData.refreshToken)
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -53,9 +53,9 @@ class UserController {
 
     async refresh(req, res, next) {
         try {
-            const {refreshToken} = req.cookies
+            const {refreshToken} = req.body // change it to req.cookie
             const userData = await userService.refresh(refreshToken)
-            res.cookie('refreshToken')
+            res.cookie('refreshToken', userData.refreshToken)
             return res.json(userData)
         } catch (e) {
             next(e)
