@@ -11,7 +11,14 @@ class UserController {
             }
             const {email, password, name} = req.body
             const userData = await userService.registration(email, password, name)
-            res.cookie('refreshToken', userData.refreshToken, {path: '/api'})
+            res.cookie('refreshToken', userData.refreshToken, {
+                secure: true,
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'none',
+                domain: process.env.DOMAIN,
+                path: '/'
+            })
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -22,7 +29,14 @@ class UserController {
         try {
             const {email, password} = req.body
             const userData = await userService.login(email, password)
-            res.cookie('refreshToken', userData.refreshToken, {path: '/api'})
+            res.cookie('refreshToken', userData.refreshToken,{
+                secure: true,
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'none',
+                domain: process.env.DOMAIN,
+                path: '/'
+            })
             return res.json(userData)
         } catch (e) {
             next(e)
@@ -33,7 +47,14 @@ class UserController {
         try {
             const {refreshToken} = req.cookies
             const token = await userService.logout(refreshToken)
-            res.clearCookie('refreshToken', {path: '/api'})
+            res.clearCookie('refreshToken', {
+                secure: true,
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'none',
+                domain: process.env.DOMAIN,
+                path: '/'
+            })
             return res.json(token)
         } catch (e) {
             next(e)
@@ -55,7 +76,14 @@ class UserController {
         try {
             const {refreshToken} = req.cookies
             const userData = await userService.refresh(refreshToken)
-            res.cookie('refreshToken', userData.refreshToken, {path: '/api'})
+            res.cookie('refreshToken', userData.refreshToken, {
+                secure: true,
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+                httpOnly: true,
+                sameSite: 'none',
+                domain: process.env.DOMAIN,
+                path: '/'
+            })
             return res.json(userData)
         } catch (e) {
             next(e)
