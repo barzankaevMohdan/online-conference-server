@@ -17,7 +17,7 @@ app.use(session({
         maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
         sameSite: 'none',
-        domain: process.env.DOMAIN,
+        domain: process.env.CLIENT_URL,
         path: '/'
     }
 }))
