@@ -18,6 +18,7 @@ app.use(session({
         httpOnly: true,
         sameSite: 'none',
         domain: process.env.DOMAIN,
+        path: '/'
     }
 }))
 app.set('trust proxy', 1)
