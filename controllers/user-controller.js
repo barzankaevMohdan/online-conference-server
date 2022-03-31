@@ -15,6 +15,7 @@ class UserController {
                 secure: true,
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
+                sameSite: 'none',
                 path: '/'
             })
             return res.json(userData)
@@ -31,6 +32,7 @@ class UserController {
                 secure: true,
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
+                sameSite: 'none',
                 path: '/'
             })
             return res.json(userData)
@@ -47,6 +49,7 @@ class UserController {
                 secure: true,
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
+                sameSite: 'none',
                 path: '/'
             })
             return res.json(token)
@@ -74,6 +77,7 @@ class UserController {
                 secure: true,
                 maxAge: 30 * 24 * 60 * 60 * 1000,
                 httpOnly: true,
+                sameSite: 'none',
                 domain: process.env.DOMAIN,
                 path: '/'
             })
