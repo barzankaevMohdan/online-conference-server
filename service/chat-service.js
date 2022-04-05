@@ -6,6 +6,11 @@ class ChatService {
         return chat
     }
 
+    async deleteMessage(id) {
+        const chat = await Message.destroy({where: {id}})
+        return chat
+    }
+
     async getMessages(chatRoomId, limit, offsetClient) {
         const count = await Message.count({where: {chatRoomId}})
         // оффсет будет с конца массива

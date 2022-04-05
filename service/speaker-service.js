@@ -10,6 +10,16 @@ class SpeakerService {
         const streams = await Speaker.findAll()
         return streams
     }
+
+    async updateSpeaker(id, login, company_name, name, position, about, speechId) {
+        const speaker = await Speaker.update({login, company_name, name, position, about, speechId}, {where: {id}})
+        return speaker
+    }
+
+    async deleteSpeaker(id) {
+        const speaker = await Speaker.destroy({where: {id}})
+        return speaker
+    }
 }
 
 module.exports = new SpeakerService()

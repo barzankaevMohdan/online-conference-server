@@ -22,6 +22,16 @@ class SpeakerController {
             console.log(e)
         }
     }
+
+    async deleteMessage(req, res, next) {
+        try {
+            const {id} = req.params
+            const chatData = await chatService.deleteMessage(id)
+            return res.json(chatData)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }
 
 module.exports = new SpeakerController()

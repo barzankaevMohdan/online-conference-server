@@ -19,6 +19,27 @@ class SpeechController {
             console.log(e)
         }
     }
+
+    async updateSpeech(req, res, next) {
+        try {
+            const {id} = req.params
+            const {title, info, time_begin, time_end, status} = req.body
+            const speechData = await speechService.updateSpeech(id, title, info, time_begin, time_end, status)
+            return res.json(speechData)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async deleteSpeech(req, res, next) {
+        try {
+            const {id} = req.params
+            const speechData = await speechService.deleteSpeech(id)
+            return res.json(speechData)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }
 
 module.exports = new SpeechController()
