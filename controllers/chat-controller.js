@@ -3,9 +3,9 @@ const chatService = require("../service/chat-service");
 class SpeakerController {
     async createMessage(req, res, next) {
         try {
-            const chatRoomId = req.params.id
+            const streamId = req.params.id
             const {text, time, user} = req.body
-            const chatData = await chatService.createMessage(chatRoomId, text, time, user)
+            const chatData = await chatService.createMessage(text, time, user, streamId)
             return res.json(chatData)
         } catch (e) {
             console.log(e)
@@ -14,9 +14,9 @@ class SpeakerController {
 
     async getMessages(req, res, next) {
         try {
-            const chatId = req.params.id
+            const streamId = req.params.id
             const { limit, offset } = req.query
-            const chatData = await chatService.getMessages(chatId, limit, offset)
+            const chatData = await chatService.getMessages(streamId, limit, offset)
             return res.json(chatData)
         } catch (e) {
             console.log(e)
