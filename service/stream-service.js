@@ -6,6 +6,11 @@ class StreamService {
         return stream
     }
 
+    async deleteStream(id) {
+        const stream = await Stream.destroy({where: {id}})
+        return stream
+    }
+
     async getAllStreams() {
         const streams = await Stream.findAll()
         return streams

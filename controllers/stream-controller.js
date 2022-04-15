@@ -11,6 +11,16 @@ class StreamController {
         }
     }
 
+    async deleteStream(req, res, next) {
+        try {
+            const {id} = req.params
+            const streamData = await streamService.deleteStream(id)
+            return res.json(streamData)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async getAllStreams(req, res, next) {
         try {
             const streams = await streamService.getAllStreams()
