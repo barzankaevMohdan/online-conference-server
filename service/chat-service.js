@@ -13,7 +13,7 @@ class ChatService {
 
     async getMessages(streamId, limit, offsetClient) {
         const count = await Message.count({where: {streamId}})
-        // оффсет будет с конца массива
+        // offset будет с конца массива
         let offset = count - limit - offsetClient
         offset = offset < 0 ? 0 : offset
         const chat = await Message.findAndCountAll({where: {streamId}, limit, offset})
