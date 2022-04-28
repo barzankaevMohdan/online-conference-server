@@ -49,12 +49,10 @@ class UserService {
         if (!isPassEquals) {
             throw ApiError.BadRequest('Неверный пароль')
         }
-        const activationLink = uuid.v4()
         const userDto = new UserDto(user)
         const userTokenDto = new UserTokenDto(user)
         const tokens = tokenService.generateToken({...userTokenDto})
         await tokenService.saveToken(userTokenDto.id, tokens.refreshToken)
-        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`)
 
         return {
             ...tokens,
