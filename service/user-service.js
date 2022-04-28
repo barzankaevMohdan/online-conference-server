@@ -65,16 +65,16 @@ class UserService {
         return token
     }
 
-    async forgot(email) {
+    async recovery(email) {
         const user = await User.findOne({where: {email}})
         if (!user) {
             throw ApiError.BadRequest
             ('Пользователь не найден')
         }
-        await mailService.sendForgotMail(email, `${process.env.CLIENT_URL}/${user.activationLink}`)
+        await mailService.sendRecoveryMail(email, `${process.env.CLIENT_URL}/${user.activationLink}`)
     }
 
-    async recovery(activationLink, password) {
+    async recoveryLink(activationLink, password) {
         const user = await User.findOne({where: {activationLink}})
         if (!user) {
             throw ApiError.BadRequest

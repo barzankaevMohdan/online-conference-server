@@ -4,9 +4,10 @@ class mailService {
 
     constructor() {
         this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port:process.env.SMTP_PORT,
-            secure:false,
+            // host: process.env.SMTP_HOST,
+            // port:process.env.SMTP_PORT,
+            // secure:false,
+            service: 'gmail',
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
@@ -18,7 +19,7 @@ class mailService {
             await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
-                subject: 'Активация аккаунта на ' + process.env.API_URL,
+                subject: 'Активация аккаунта на ' + process.env.CLIENT_URL,
                 text: '',
                 html:
                     `
@@ -32,12 +33,12 @@ class mailService {
             console.log(e);
         }
     }
-    async sendForgotMail(to, link) {
+    async sendRecoveryMail(to, link) {
         try {
             await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
-                subject: 'Востановление аккаунта на ' + process.env.API_URL,
+                subject: 'Востановление аккаунта на ' + process.env.CLIENT_URL,
                 text: '',
                 html:
                     `

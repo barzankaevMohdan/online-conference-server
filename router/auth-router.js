@@ -11,8 +11,8 @@ router.post('/registration',
     userController.registration)
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
-router.post('/forgot', userController.forgot)
-router.post('/recovery/:link', userController.recovery)
+router.post('/recovery', userController.recovery)
+router.post('/recovery/:link', userController.recoveryLink)
 router.get('/activate/:link', userController.activate)
 router.post('/refresh', userController.refresh) // change to get
 router.get('/users', authMiddleware, userController.getUsers)

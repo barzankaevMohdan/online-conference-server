@@ -50,21 +50,21 @@ class UserController {
         }
     }
 
-    async forgot(req, res, next) {
+    async recovery(req, res, next) {
         try {
             const {login} = req.body
-            await userService.forgot(login)
+            await userService.recovery(login)
             return res.json(login)
         } catch (e) {
             next(e)
         }
     }
 
-    async recovery(req, res, next) {
+    async recoveryLink(req, res, next) {
         try {
             const {link} = req.params
             const {password} = req.body
-            const userData = await userService.recovery(link, password)
+            const userData = await userService.recoveryLink(link, password)
             return res.json(userData)
         } catch (e) {
             next(e)
