@@ -43,9 +43,29 @@ class UserController {
     async activate(req, res, next) {
         try {
             const activationLink = req.params.link
-            console.log(activationLink);
             await userService.activate(activationLink)
             return res.redirect(process.env.CLIENT_URL)
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    async forgot(req, res, next) {
+        try {
+            const {login} = req.body
+            await userService.forgot(login)
+            return res.json(login)
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    async recovery(req, res, next) {
+        try {
+            const {link} = req.params
+            const {password} = req.body
+            const userData = await userService.recovery(link, password)
+            return res.json(userData)
         } catch (e) {
             next(e)
         }

@@ -49,10 +49,12 @@ class UserService {
         if (!isPassEquals) {
             throw ApiError.BadRequest('Неверный пароль')
         }
+        const activationLink = uuid.v4()
         const userDto = new UserDto(user)
         const userTokenDto = new UserTokenDto(user)
         const tokens = tokenService.generateToken({...userTokenDto})
         await tokenService.saveToken(userTokenDto.id, tokens.refreshToken)
+        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/user/activate/${activationLink}`)
 
         return {
             ...tokens,
@@ -63,6 +65,36 @@ class UserService {
     async logout(refreshToken) {
         const token = await tokenService.removeToken(refreshToken)
         return token
+    }
+
+    async forgot(email) {
+        const user = await User.findOne({where: {email}})
+        if (!user) {
+            throw ApiError.BadRequest
+            ('Пользователь не найден')
+        }
+        await mailService.sendForgotMail(email, `${process.env.CLIENT_URL}/${user.activationLink}`)
+    }
+
+    async recovery(activationLink, password) {
+        const user = await User.findOne({where: {activationLink}})
+        if (!user) {
+            throw ApiError.BadRequest
+            ('Пользователь не найден')
+        }
+        const hashPassword = await bcrypt.hash(password, 3)
+        user.password = hashPassword
+        await user.save()
+
+        const userDto = new UserDto(user) // id, email, isActivated, name
+        const userTokenDto = new UserTokenDto(user) // id, email, isActivated
+        const tokens = tokenService.generateToken({...userTokenDto})
+        await tokenService.saveToken(userTokenDto.id, tokens.refreshToken)
+
+        return {
+            ...tokens,
+            user: userDto,
+        }
     }
 
     async refresh(refreshToken) {

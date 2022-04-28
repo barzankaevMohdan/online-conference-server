@@ -30,8 +30,25 @@ class mailService {
             })
         } catch(e) {
             console.log(e);
-        }  finally {
-            console.log('next');
+        }
+    }
+    async sendForgotMail(to, link) {
+        try {
+            await this.transporter.sendMail({
+                from: process.env.SMTP_USER,
+                to,
+                subject: 'Востановление аккаунта на ' + process.env.API_URL,
+                text: '',
+                html:
+                    `
+                        <div>
+                            <h1> Для сброса пароля перейдите по ссылке </h1>
+                            <a href="${link}">${link}</a>
+                        </div>
+                    `
+            })
+        } catch(e) {
+            console.log(e);
         }
     }
 }
