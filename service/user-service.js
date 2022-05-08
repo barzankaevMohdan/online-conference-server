@@ -71,7 +71,7 @@ class UserService {
             throw ApiError.BadRequest
             ('Пользователь не найден')
         }
-        await mailService.sendRecoveryMail(email, `${process.env.CLIENT_URL}/${user.activationLink}`)
+        await mailService.sendRecoveryMail(email, `${process.env.CLIENT_URL}/recovery/${user.activationLink}`)
     }
 
     async recoveryLink(activationLink, password) {
