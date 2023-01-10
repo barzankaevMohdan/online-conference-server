@@ -8,6 +8,7 @@ const errorMiddleware = require('./middlewares/error-middleware')
 const session = require('express-session')
 
 const PORT = process.env.PORT || 5000
+const allowedDomains = [process.env.CLIENT_URL, process.env.CLIENT_URL_LOCAL];
 const app = express()
 app.use(session({
     secureProxy: true,
@@ -26,7 +27,15 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: process.env.CLIENT_URL
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        
+        if (!allowedDomains.includes(origin)) {
+            var msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    }
 }))
 app.use('/api', router)
 app.use(errorMiddleware)
